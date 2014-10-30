@@ -31,6 +31,7 @@ public class AuTomatic {
 	private boolean b_exit;
 
 	public boolean isB_exit() {
+		UserCountTime = 0;
 		return b_exit;
 	}
 

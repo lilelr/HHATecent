@@ -2,6 +2,8 @@ package hha.util;
 
 import hha.main.MainActivity;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -10,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.CharBuffer;
@@ -120,19 +123,31 @@ public class DataFileReader {
 	}
 
 	public static String InputStreamToString(InputStream in) {
-		CharBuffer cb = null;
+		char[] c = new char[4096];
+		StringBuffer out = new StringBuffer();
 		try {
-			cb = CharBuffer.allocate(in.available());
 			BufferedReader br = new BufferedReader(new InputStreamReader(in,
 					"utf-8"));
-			br.read(cb);
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			for (int n; (n = br.read(c)) != -1;) {
+				out.append(new String(c, 0, n));
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return cb.toString();
+		return out.toString();
+	}
+	
+	public static void CopyFile(InputStream in, OutputStream out) throws IOException {
+		byte[] buf = new byte[1024];
+		int n;
+
+		BufferedInputStream fin = new BufferedInputStream(in);
+		BufferedOutputStream fout = new BufferedOutputStream(out);
+		while ((n = fin.read(buf)) != -1) {
+			fout.write(buf, 0, n);
+		}
+		fin.close();
+		fout.close();
 	}
 }

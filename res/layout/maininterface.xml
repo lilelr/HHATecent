@@ -45,9 +45,10 @@
         android:scrollbars="vertical" />
 
     <ScrollView
-        android:layout_weight="25"
+        android:id="@+id/scroll_view"
         android:layout_width="fill_parent"
-        android:layout_height="0px" >
+        android:layout_height="0px"
+        android:layout_weight="25" >
 
         <TextView
             android:id="@+id/main_text"

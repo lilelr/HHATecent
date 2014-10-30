@@ -38,7 +38,7 @@ public class Jcseg {
 	public static void initSeg() {
 		try {
 //			findChinese = Pattern.compile("^[\u4E00-\u9FA5].*");
-			findChinese = Pattern.compile("^[a-zA-Z0-9#\\$].*");
+			findChinese = Pattern.compile("^[a-zA-Z#\\$].*");
 			seg = (ASegment) SegmentFactory.createJcseg(
 					JcsegTaskConfig.COMPLEX_MODE, new Object[] { config, dic });
 			isInitDone = true;

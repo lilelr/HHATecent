@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <aiml>
 	<category>
-		<regex>* 健康 检查 *</regex>
+		<regex>* 健康 #检查|统计|调查 *</regex>
 		<template>
 			<random>
 				<li>好的，那我就给您做次检查吧！</li>
@@ -53,6 +53,19 @@
 		<template>
 			<random>
 				<li>恩，那好吧，不过还是建议您多留心您的身体啊^_^</li>
+				<li>好的，我知道了</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<regex>* 返回 #(普通模式)? *</regex>
+		<template>
+			<think>
+				<set mode="normal"></set>
+			</think>
+			<random>
+				<li>恩，那好吧，回到普通模式</li>
 				<li>好的，我知道了</li>
 			</random>
 		</template>

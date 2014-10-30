@@ -14,6 +14,8 @@ You should have received a copy of the GNU General Public License along with Cha
 
 package bitoflife.chatterbean.aiml;
 
+import hha.main.MainActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,36 +70,18 @@ public class Add extends TemplateElement {
 		else {
 			AliceBot bot = match.getCallback();
 			Context context = (bot != null ? bot.getContext() : null);
-			if ("name".equals(name_att)) {
-				if (context != null) {
-					@SuppressWarnings("unchecked")
-					List<UserData> UserDatalist = (List<UserData>) context
-							.property("userdata." + name);
-					if (UserDatalist == null) {
-						UserDatalist = new ArrayList<UserData>();
-						UserData ud = new UserData(output, new java.util.Date());
-						UserDatalist.add(ud);
-						context.property("userdata." + name, UserDatalist);
-					} else {
-						UserData ud = new UserData(output, new java.util.Date());
-						UserDatalist.add(ud);
-					}
+			String key = null;
+			String data = null;
+			if (context != null) {
+				if ("name".equals(name_att)) {
+					key = name;
+					data = output;
+				} else {
+					key = name_att;
+					data = name;
 				}
-			} else {
-				if (context != null) {
-					@SuppressWarnings("unchecked")
-					List<UserData> UserDatalist = (List<UserData>) context
-							.property("userdata." + name_att);
-					if (UserDatalist == null) {
-						UserDatalist = new ArrayList<UserData>();
-						UserData ud = new UserData(name, new java.util.Date());
-						UserDatalist.add(ud);
-						context.property("userdata." + name, UserDatalist);
-					} else {
-						UserData ud = new UserData(name, new java.util.Date());
-						UserDatalist.add(ud);
-					}
-				}
+				MainActivity.main.getBot().addUserData(key, data,
+						new java.util.Date());
 			}
 		}
 		// java.lang.System.out.println("Set:"+output);

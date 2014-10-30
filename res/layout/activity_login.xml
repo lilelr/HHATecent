@@ -31,7 +31,7 @@
 		      android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_alignLeft="@+id/userLogin"
-              android:layout_below="@+id/userName"
+              android:layout_below="@+id/username"
               android:background="@drawable/putin_textview"
 			  android:drawableLeft="@drawable/login_lock"
 		      android:inputType="textPassword"
@@ -77,7 +77,7 @@
 		      />
 
 		  <EditText
-		      android:id="@+id/userName"
+		      android:id="@+id/username"
 		      android:layout_width="fill_parent"
 		      android:layout_height="wrap_content"
 		      android:layout_alignLeft="@+id/password"
@@ -103,6 +103,20 @@
 		      android:textSize="30sp"
 		      android:textStyle="bold" />
 
+		  <EditText
+		      android:id="@+id/password_again"
+		      android:layout_width="fill_parent"
+		      android:layout_height="wrap_content"
+		      android:layout_alignLeft="@+id/password"
+		      android:layout_below="@+id/password"
+		      android:background="@drawable/putin_textview"
+		      android:drawableLeft="@drawable/login_lock"
+		      android:ems="10"
+		      android:hint="@string/passwordAgainHint"
+		      android:inputType="textPassword"
+		      android:paddingLeft="10dip"
+		      android:singleLine="true"
+		      android:visibility="gone" />
 
        </RelativeLayout>      
     </LinearLayout>

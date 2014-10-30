@@ -26,69 +26,77 @@ public class Database {
 		super();
 		this.main = main;
 		this.context = context;
-		
+
 	}
+
+	public void Close()
+	{
+		helper.Close();
+	}
+	
 	public static boolean equalpre(String str_s, String str_l) {
 		return ((str_l.length() > str_s.length()) && (str_s.equals(str_l
-				.substring(0,str_s.length()))));
+				.substring(0, str_s.length()))));
 	}
-	public void SaveData()
-	{
-		Map<String,Object> map = context.getProperties();
+
+	public void SaveData() {
+		Map<String, Object> map = context.getProperties();
 		for (String key : map.keySet()) {
-			
-		    Object value = map.get(key);
-		    if ((equalpre("predicate.",key)) && (value instanceof String))
-		    {
-		    	UpdateData(key,(String)value);
-		    }
+
+			Object value = map.get(key);
+			if ((equalpre("predicate.", key)) && (value instanceof String)) {
+				UpdateData(key, (String) value);
+			}
 
 		}
 	}
-	
-	public void getData()
-	{
+
+	public void getData() {
 		Cursor c = helper.queryAll("data", null);
 		int p_k = c.getColumnIndex("key");
 		int p_v = c.getColumnIndex("value");
-		while (c.moveToNext())
-		{
+		while (c.moveToNext()) {
 			String key = c.getString(p_k);
 			String value = c.getString(p_v);
 			context.property(key, value);
 		}
 		c.close();
-		
+
 		HealthyMode hmode = (HealthyMode) Mode.getMode("healthy");
-		Update(hmode.getSenior().list);
-		Update(hmode.getElement().list);
-		Update(hmode.getRelationship().list);
+		Update(hmode.getSenior().list,"senior");
+		Update(hmode.getElement().list,"element");
+		// Update(hmode.getRelationship().list);
 	}
-	
-	
-	private void Update(String[] str)
-	{
-		for (String s : str)
-		{
-			Object o = getUserData(s);
-			context.property("userdata."+s, o);
+
+	private void Update(String[] str,String pclass) {
+		for (String s : str) {
+			Object o = getUserData(pclass+"_"+s);
+			context.property("userdata." + pclass+"_"+s, o);
 		}
 	}
-	
+
+	private boolean done = false;
+
+	public boolean isInitDone() {
+		return done;
+	}
+
 	public void InitDatabase() {
 		helper = new SQLHelper(main);
-		
+		getData();
+		done = true;
 	}
 
 	public void UpdateData(String key, String value) {
-		helper.AddOrUpdate("data",new String[]{"key","value"},new String[]{key,value});
+		helper.AddOrUpdate("data", new String[] { "key", "value" },
+				new String[] { key, value });
 	}
 
 	public String UpdateData(String key) {
-		Cursor c= helper.query("data", new String[]{"key"}, new String[]{key}, null);
+		Cursor c = helper.query("data", new String[] { "key" },
+				new String[] { key }, null);
 		String s = null;
-		while(c.moveToNext())
-		{
+		while (c.moveToNext()) {
 			s = c.getString(c.getColumnIndex("key"));
 			break;
 		}

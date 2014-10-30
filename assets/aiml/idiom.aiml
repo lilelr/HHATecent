@@ -16,6 +16,9 @@
   <regex>* 伟哉我大科长 *</regex>
   <template>
   	<emotion happiness="-100" vitality="10" confidence="20" mighty="-10" />
+    <sound name="搞笑救命" type="pre|back|rate"></sound>
+    <sound name="尴尬音" type="pre|rate120"></sound>
+    <sound name="钢琴音" type="suf|loop2"></sound>
     <random>
       <li>壮哉我大科长，哎，你一天几十遍的问我这句话有意思吗？啊，我虽然是个机器人，但也是要耗电的啊！无不无聊！烦死人了有木有！</li>
       <li>壮哉我大科长啊！</li>

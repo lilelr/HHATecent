@@ -22,10 +22,10 @@ public class NomalMode extends Mode {
 		// TODO Auto-generated method stub
 		s_emotionStatus = bot.getProperty("Emotion");
 		
-		if (UserCount == i_waitTime) {
+		if (RobotCount == i_waitTime) {
 			String ansString = bot.Respond("AUTO_"+s_emotionStatus);
-			mainActivity.Show("AUTO_"+s_emotionStatus, ansString);
-			i_waitTime = (int) N_rand(30,5,0,60);
+			mainActivity.Show(null, ansString);
+			i_waitTime = (int) N_rand(45,5,30,60);
 		}
 		
 		if (UserCount == 180) {

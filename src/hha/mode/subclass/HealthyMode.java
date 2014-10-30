@@ -4,15 +4,19 @@ import hha.main.MainActivity;
 import hha.mode.Mode;
 import hha.mode.PArray;
 import hha.util.DataFileReader;
+import hha.util.DateCal;
 import hha.util.RandomSequence;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import bitoflife.chatterbean.util.UserData;
 
 import com.lilele.automatic.AuTomatic;
 
@@ -71,7 +75,7 @@ public class HealthyMode extends Mode {
 		super(mainActivity, auto);
 		// TODO Auto-generated constructor stub
 
-		i_waitTime = (int) N_rand(15, 3, 10, 20);
+		i_waitTime = (int) N_rand(10, 5, 5, 20);
 
 		String jsondata = DataFileReader.ReadFile("healthy.json");
 		if (jsondata == null) {
@@ -163,6 +167,7 @@ public class HealthyMode extends Mode {
 		}
 		return strings;
 	}
+	
 	private String[] JSONArrayToStringArray(JSONArray array, String att)
 			throws JSONException {
 		String[] strings = new String[array.length()];
@@ -175,10 +180,33 @@ public class HealthyMode extends Mode {
 
 	private List<String> element_ask = new ArrayList<String>();
 
-	private boolean FindNullProperty(PArray data) {
+	private boolean FindNullProperty(PArray data,String pclass) {
 		for (int i = data.p; i < data.list.length; i++) {
-			String prop = bot.getProperty(data.list[i]);
+			String prop = bot.getProperty(pclass+"_"+data.list[i]);
 			if (prop == null) {
+				String ans = bot.Respond("ask_" + data.list[i]);
+				mainActivity.Show(null, ans);
+				data.p = i;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isTimeToAsk(PArray data,String pclass)
+	{
+		for (int i = data.p; i < data.list.length; i++) {
+			List<UserData> userdata = bot.getUserData(pclass+"_"+data.list[i]);
+			if ((userdata == null) || (userdata.size()==0))
+			{
+				String ans = bot.Respond("ask_" + data.list[i]);
+				mainActivity.Show(null, ans);
+				data.p = i;
+				return true;
+			}
+			UserData lastData = userdata.get(userdata.size()-1);
+			if (DateCal.getDay(lastData.date,new Date())>data.fre[i])
+			{
 				String ans = bot.Respond("ask_" + data.list[i]);
 				mainActivity.Show(null, ans);
 				data.p = i;
@@ -189,43 +217,37 @@ public class HealthyMode extends Mode {
 	}
 
 	public void CheckItem() {
-		if (FindNullProperty(user)) {
+		if (FindNullProperty(user,"user")) {
 			return;
 		}
 
-		int t = rand.nextInt(4);
+		int t = rand.nextInt(2);
 		switch (t) {
 		case 0:
-			if (FindNullProperty(relationship)) {
+			if (isTimeToAsk(element,"element")) {
 				return;
 			}
 		case 1:
-			if (FindNullProperty(element)) {
-				return;
-			}
-		case 2:
-			if (FindNullProperty(senior)) {
-				return;
-			}
-		case 3:
-			if (FindNullProperty(history)) {
+			if (isTimeToAsk(senior,"senior")) {
 				return;
 			}
 		default:
-			if (FindNullProperty(element)) {
+			if (isTimeToAsk(element,"element")) {
 				return;
 			}
 		}
+		
+		bot.setProperty("mode", "normal");
 	}
 
 	@Override
 	public void Run(int UserCount, int RobotCount) {
 		// TODO Auto-generated method stub
-		if ((i_waitTime == RobotCount)||(10 == UserCount)) {
+		if ((i_waitTime == RobotCount)||(6 == UserCount)) {
 			mainActivity.ShowTextOnUIThread("CheckItem");
 			CheckItem();
 
-			i_waitTime = (int) N_rand(30, 6, 20, 40);
+			i_waitTime = (int) N_rand(30, 6, 25, 35);
 		}
 		if (UserCount == 90) {
 			mainActivity.ShowTextOnUIThread("免打扰");

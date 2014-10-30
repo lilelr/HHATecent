@@ -110,6 +110,7 @@ public class SQLHelper {
 	 */
 	private void update(String tableName, String key, String value,
 			String[] keys, String[] values) {
+	
 		SQLiteDatabase db = helper.getWritableDatabase();
 		StringBuilder sBuilder = new StringBuilder();
 		// "update person set name=?, phone=? where id=?"
@@ -126,7 +127,7 @@ public class SQLHelper {
 		paramsList.toArray(params);
 		params[values.length] = value;
 		db.execSQL(sBuilder.toString(), params);
-		db.close();
+//		db.close();
 	}
 
 	// ������time
@@ -136,7 +137,7 @@ public class SQLHelper {
 		String sqlString = getCreateString(tableName, attrNames, typeNames,
 				false);
 		db.execSQL(sqlString);
-		db.close();
+//		db.close();
 	}
 
 	// ������time
@@ -146,7 +147,7 @@ public class SQLHelper {
 		String sqlString = getCreateString(tableName, attrNames, typeNames,
 				true);
 		db.execSQL(sqlString);
-		db.close();
+//		db.close();
 	}
 
 	// ���������time
@@ -154,7 +155,7 @@ public class SQLHelper {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		String sqlString = getAddString(tableName, attrNames, false);
 		db.execSQL(sqlString, values);
-		db.close();
+//		db.close();
 	}
 
 	// ���������time(��ʱ���ô�)
@@ -164,13 +165,21 @@ public class SQLHelper {
 		String sqlString = getAddString(tableName, attrNames, true);
 
 		db.execSQL(sqlString, values);
-		db.close();
+//		db.close();
 	}
 
+	SQLiteDatabase opened_db;
+	Cursor cursor;
+	
+	public void Close()
+	{
+		opened_db.close();
+	}
+	
 	// ��ѯ���
 	public Cursor query(String tableName, String[] keys, String[] values,
 			String orderBy) {
-		SQLiteDatabase db = helper.getReadableDatabase();
+		opened_db = helper.getReadableDatabase();
 		StringBuilder sBuilder = new StringBuilder();
 		sBuilder.append("select * from " + tableName + " where ");
 		for (int i = 0; i < keys.length; i++) {
@@ -182,20 +191,21 @@ public class SQLHelper {
 		if (orderBy != null) {
 			sBuilder.append("order by " + orderBy);
 		}
-		Cursor cursor = db.rawQuery(sBuilder.toString(), values);
-		db.close();
+		cursor = opened_db.rawQuery(sBuilder.toString(), values);
+		
 		return cursor;
 	}
 
 	public Cursor queryAll(String tableName, String orderBy) {
-		SQLiteDatabase db = helper.getReadableDatabase();
+		
+		opened_db = helper.getReadableDatabase();
 		StringBuilder sBuilder = new StringBuilder();
 		sBuilder.append("select * from " + tableName);
 		if (orderBy != null) {
 			sBuilder.append("order by " + orderBy);
 		}
-		Cursor cursor = db.rawQuery(sBuilder.toString(), null);
-		db.close();
+		cursor = opened_db.rawQuery(sBuilder.toString(), null);
+		
 		return cursor;
 	}
 }

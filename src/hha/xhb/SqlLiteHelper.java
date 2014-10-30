@@ -27,7 +27,7 @@ public class SqlLiteHelper extends SQLiteOpenHelper {
 	private void Creating(PArray atts, String pclass) {
 		for (int i = 0; i < atts.list.length; i++) {
 
-			helper.createTable(atts.list[i], new String[] { "time", "value" },
+			helper.createTable("dbt_"+pclass+"_"+atts.list[i], new String[] { "time", "value" },
 					new String[] { "varchar(30)", "double" });
 //			helper.add("Main", new String[] { "name", "unit", "fre", "class" },
 //					new Object[] { "dbt_" + atts.list[i], atts.unit[i],
@@ -38,7 +38,7 @@ public class SqlLiteHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		//����Main��
-		this.mDefaultWritableDatabase = db;
+		this.db = db;
 		db.execSQL(SQLString.CREATE_TABLE_MAIN_STRING);
 //		MainActivity.main.Show("每次都执行？", "只执行一次");
 		HealthyMode hmode = (HealthyMode) Mode.getMode("healthy");
@@ -53,13 +53,13 @@ public class SqlLiteHelper extends SQLiteOpenHelper {
 		Creating(hmode.getSenior(), "senior");
 	}
 
-	private SQLiteDatabase mDefaultWritableDatabase = null;
+	public SQLiteDatabase db = null;
 
 	@Override
 		public SQLiteDatabase getWritableDatabase() {
 			final SQLiteDatabase db;
-			if(mDefaultWritableDatabase != null){
-				db = mDefaultWritableDatabase;
+			if(this.db != null){
+				db = this.db;
 			} else {
 				db = super.getWritableDatabase();
 			}
@@ -68,12 +68,12 @@ public class SqlLiteHelper extends SQLiteOpenHelper {
 
 	@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			this.mDefaultWritableDatabase = db;
+		this.db = db;
 	}
 
 	@Override
 		public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			this.mDefaultWritableDatabase = db;
+		this.db = db;
 	}
 
 }

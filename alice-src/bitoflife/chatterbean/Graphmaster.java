@@ -213,12 +213,12 @@ public class Graphmaster {
 		for (int i = index; i < n; ++i) {
 			str.append(match.getMatchPath(i));
 			m = pattern.matcher(str.toString());
-			System.out.println("Match:" + name + " <- " + str.toString());
+//			System.out.println("Match:" + name + " <- " + str.toString());
 			// System.out.println("Match:" + str.toString());
 			if (m.matches()) {
 				// System.out.println("MatchSucceed");
-				MainActivity.main.ShowTextOnUIThread("MatchSucceed:"
-						+ str.toString());
+//				MainActivity.main.ShowTextOnUIThread("MatchSucceed:"
+//						+ str.toString());
 				EndMatch = i + 1;
 				canMatch = true;
 
@@ -226,10 +226,14 @@ public class Graphmaster {
 
 				if (!m.hitEnd()) {
 					// System.out.println("Can't find Match!");
+					m = pattern.matcher("");
+					if (m.matches())
+					{
+						EndMatch = index;
+						canMatch = true;
+					}
 					break;
 				}
-
-				// System.out.println("MatchFailed");
 			}
 		}
 

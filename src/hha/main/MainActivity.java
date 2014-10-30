@@ -2,15 +2,14 @@ package hha.main;
 
 import hha.aiml.Jcseg;
 import hha.aiml.Robot;
-import hha.mode.Database;
 import hha.robot.R;
+import hha.util.ApkInstaller;
 import hha.util.Caller;
 import hha.util.ChatMsgEntity;
 import hha.util.ChatMsgViewAdapter;
 import hha.util.DataFileReader;
 import hha.util.ExitApplication;
-import hha.util.PackageUtil;
-import hha.util.music.Player;
+import hha.util.music.LocalSoundPlayer;
 import hha.xf.Data;
 import hha.xf.NetRobot;
 import hha.xf.Reader;
@@ -18,25 +17,28 @@ import hha.xf.Reader;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -47,10 +49,12 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SeekBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ZipUtil;
+import com.iflytek.speech.SpeechUtility;
 import com.lilele.automatic.AuTomatic;
 
 import dalvik.system.DexClassLoader;
@@ -61,8 +65,38 @@ public class MainActivity extends Activity implements Runnable {
 	public static MainActivity main;
 	private AuTomatic mAuTomatic;
 	private Toast mToast;
-	private TextView text = null;
-	Caller call = null;
+	private TextView text = null; // 文本框
+	private Caller call = null; // 打电话功能
+	private Robot bot; // 本地机器人
+	private NetRobot netbot; // 讯飞网络机器人
+	private Reader reader; // 讯飞语音合成器
+
+	public LocalSoundPlayer getPlayer() {
+		return player;
+	}
+
+	private ArrayList<ChatMsgEntity> list = new ArrayList<ChatMsgEntity>();
+
+	private ByteArrayOutputStream gossip;
+	// private AssetManager am;
+	// private Player player;
+	private AudioManager audiom;
+	private int oldAudio;
+	private boolean isButtonPress;
+
+	private PackageManager pm;
+	private ResolveInfo homeInfo;
+
+	private Button mainButton = null;
+	public Button button = null;
+
+	private ListView talkView;
+
+	private String BotName = "小X";
+	private String UserName = "用户";
+
+	LocalSoundPlayer player;
+	private ScrollView scrollView;
 
 	public Robot getBot() {
 		return bot;
@@ -76,12 +110,9 @@ public class MainActivity extends Activity implements Runnable {
 		return reader;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	public Button mainButton = null;
-	public Button button = null;
+	// public Player getPlayer() {
+	// return player;
+	// }
 
 	@Override
 	protected void onPause() {
@@ -95,7 +126,11 @@ public class MainActivity extends Activity implements Runnable {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		mAuTomatic.start();
-
+		if (!AppData.DebugMode) { 
+			scrollView.setVisibility(View.GONE);
+		} else {
+			scrollView.setVisibility(View.VISIBLE);  
+		}
 		super.onResume();
 	}
 
@@ -109,9 +144,9 @@ public class MainActivity extends Activity implements Runnable {
 	}
 
 	public void Welcome() {
-//		String ansString = "欢迎您，我是智能助手小X";
-//		text.setText(ansString + "\n");
-//		reader.start(ansString);
+		// String ansString = "欢迎您，我是智能助手小X";
+		// text.setText(ansString + "\n");
+		// reader.start(ansString);
 	}
 
 	public void showTip(final String str) {
@@ -153,23 +188,18 @@ public class MainActivity extends Activity implements Runnable {
 		});
 	}
 
-//	private String getDate() {
-//		Calendar c = Calendar.getInstance();
-//		String date = String.valueOf(c.get(Calendar.YEAR)) + "-"
-//				+ String.valueOf(c.get(Calendar.MONTH)) + "-"
-//				+ c.get(c.get(Calendar.DAY_OF_MONTH));
-//		return date;
-//	}
-
-	private ListView talkView;
-
-	private String BotName = "小X";
-	private String UserName = "用户";
+	// private String getDate() {
+	// Calendar c = Calendar.getInstance();
+	// String date = String.valueOf(c.get(Calendar.YEAR)) + "-"
+	// + String.valueOf(c.get(Calendar.MONTH)) + "-"
+	// + c.get(c.get(Calendar.DAY_OF_MONTH));
+	// return date;
+	// }
 
 	public void AddNewTalk(String user, String ans) {
 		int MeId = R.layout.list_say_he_item;
 		int HeId = R.layout.list_say_me_item;
-//		String date = getDate();
+		// String date = getDate();
 		if ((user != null) || ("".equals(user))) {
 			ChatMsgEntity newMessage = new ChatMsgEntity(UserName, null, user,
 					MeId);
@@ -206,8 +236,9 @@ public class MainActivity extends Activity implements Runnable {
 				}
 				audiom.setStreamVolume(AudioManager.STREAM_MUSIC, oldAudio,
 						AudioManager.FLAG_PLAY_SOUND);
-				reader.start(ansString);
-				
+
+				player.play(true, ansString);
+
 			}
 		});
 	}
@@ -236,11 +267,11 @@ public class MainActivity extends Activity implements Runnable {
 				Show(data.rawtext, ansString);
 				return;
 			}
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			ShowTextOnUIThread("Error: " + e.getMessage());
 		}
-
 		String input = data.rawtext;
 		input = Jcseg.chineseTranslate(input);
 
@@ -261,11 +292,8 @@ public class MainActivity extends Activity implements Runnable {
 
 		mAuTomatic.setS_emotionStatus("高兴");
 		mAuTomatic.setB_exit(false);
+		
 	}
-
-	Robot bot; // 本地机器人
-	NetRobot netbot; // 讯飞网络机器人
-	Reader reader; // 讯飞语音合成器
 
 	public String convertStreamToString(InputStream is) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -288,19 +316,9 @@ public class MainActivity extends Activity implements Runnable {
 
 	}
 
-	private ArrayList<ChatMsgEntity> list = new ArrayList<ChatMsgEntity>();
-
-	private ByteArrayOutputStream gossip;
-	AssetManager am;
-	Player player;
-	AudioManager audiom;
-	int oldAudio;
-	boolean isButtonPress;
-
-	PackageManager pm;
-	ResolveInfo homeInfo;
-
 	public void Exit() {
+		if (bot != null && (bot.getDb() != null) && (bot.getDb().isInitDone()))
+			bot.getDb().SaveData();
 		ActivityInfo ai = homeInfo.activityInfo;
 		Intent startIntent = new Intent(Intent.ACTION_MAIN);
 		startIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -329,25 +347,25 @@ public class MainActivity extends Activity implements Runnable {
 		}
 	}
 
-	 @SuppressLint("NewApi")
-	 private DexClassLoader MakeClassLoad(PackageManager pm)
-	 {
-	 /**使用DexClassLoader方式加载类*/
-	 //dex压缩文件的路径(可以是apk,jar,zip格式)
-	 String dexPath = Environment.getExternalStorageDirectory().toString() +
-	 File.separator + "Dynamic.apk";
-	 //dex解压释放后的目录
-	 //String dexOutputDir = getApplicationInfo().dataDir;
-	 String dexOutputDirs =
-	 Environment.getExternalStorageDirectory().toString();
-	 //定义DexClassLoader
-	 //第一个参数：是dex压缩文件的路径
-	 //第二个参数：是dex解压缩后存放的目录
-	 //第三个参数：是C/C++依赖的本地库文件目录,可以为null
-	 //第四个参数：是上一级的类加载器
-	 return new DexClassLoader(dexPath,dexOutputDirs,null,getClassLoader());
-	 }
-	
+	@SuppressLint("NewApi")
+	private DexClassLoader MakeClassLoad(PackageManager pm) {
+		/** 使用DexClassLoader方式加载类 */
+		// dex压缩文件的路径(可以是apk,jar,zip格式)
+		String dexPath = Environment.getExternalStorageDirectory().toString()
+				+ File.separator + "Dynamic.apk";
+		// dex解压释放后的目录
+		// String dexOutputDir = getApplicationInfo().dataDir;
+		String dexOutputDirs = Environment.getExternalStorageDirectory()
+				.toString();
+		// 定义DexClassLoader
+		// 第一个参数：是dex压缩文件的路径
+		// 第二个参数：是dex解压缩后存放的目录
+		// 第三个参数：是C/C++依赖的本地库文件目录,可以为null
+		// 第四个参数：是上一级的类加载器
+		return new DexClassLoader(dexPath, dexOutputDirs, null,
+				getClassLoader());
+	}
+
 	public List<String> ListPackage(String str) {
 		List<String> data = new ArrayList<String>();
 		try {
@@ -355,7 +373,8 @@ public class MainActivity extends Activity implements Runnable {
 			for (Enumeration<String> iter = df.entries(); iter
 					.hasMoreElements();) {
 				String s = iter.nextElement();
-				if (s.length()>str.length() && str.equals(s.substring(0, str.length())))
+				if (s.length() > str.length()
+						&& str.equals(s.substring(0, str.length())))
 					data.add(s);
 			}
 		} catch (IOException e) {
@@ -369,15 +388,38 @@ public class MainActivity extends Activity implements Runnable {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DataFileReader.am = getAssets();
+		install();
 		main = MainActivity.this;
 		pm = getPackageManager();
 		homeInfo = pm.resolveActivity(new Intent(Intent.ACTION_MAIN)
 				.addCategory(Intent.CATEGORY_HOME), 0);
-		PackageUtil.loader = MakeClassLoad(pm);
+		
+		// 复制并解压缩zip文件
+		File dir = new File(this.getFilesDir().getAbsolutePath() + "/audio/");
+		if (!dir.isDirectory()) {
+			try {
+				DataFileReader.CopyFile(getAssets().open("audio.zip"),
+						new FileOutputStream(this.getFilesDir()
+								.getAbsolutePath() + "/audio.zip"));
+				File f = this.getFileStreamPath("audio.zip");
+				ZipUtil.unZipFile(f.getAbsolutePath(), this.getFilesDir()
+						.getAbsolutePath() + "/audio/");
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+		// 初始化音乐播放模块
+		player = new LocalSoundPlayer(this);
+		player.SoundPoolLoad();
 
 		setContentView(R.layout.maininterface);
 		talkView = (ListView) findViewById(R.id.talkList);
-
+		scrollView = (ScrollView) findViewById(R.id.scroll_view);
 		mainButton = (Button) findViewById(R.id.button_main);
 		mainButton.setOnClickListener(new View.OnClickListener() {
 
@@ -427,7 +469,12 @@ public class MainActivity extends Activity implements Runnable {
 
 		this.mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
 		text.setText("欢迎\n");
-
+		AppData.LoadData();
+		if (!AppData.DebugMode) { 
+			scrollView.setVisibility(View.GONE);  
+		} else {
+			scrollView.setVisibility(View.VISIBLE);  
+		}
 		try {
 			// 初始化本地机器人
 			bot = new Robot(getAssets(), this);
@@ -447,7 +494,6 @@ public class MainActivity extends Activity implements Runnable {
 
 			// text.setText(text.getText() + "正在初始化音乐播放器\n");
 			// 初始化音乐Player
-			player = new Player(new SeekBar(context));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -474,4 +520,60 @@ public class MainActivity extends Activity implements Runnable {
 		call = new Caller(MainActivity.this);
 	}
 
+	
+	/**
+	 * 如果服务组件没有安装，有两种安装方式。
+	 * 1.直接打开语音服务组件下载页面，进行下载后安装。
+	 * 2.把服务组件apk安装包放在assets中，为了避免被编译压缩，修改后缀名为mp3，然后copy到SDcard中进行安装。
+	 */
+	private boolean processInstall(Context context ,String url,String assetsApk){
+		// 直接下载方式
+//		ApkInstaller.openDownloadWeb(context, url);
+		// 本地安装方式
+		if(!ApkInstaller.installFromAssets(context, assetsApk)){
+		    Toast.makeText(MainActivity.this, "安装失败", Toast.LENGTH_SHORT).show();
+		    return false;
+		}
+		return true;		
+	}
+	
+	 // 判断手机中是否安装了讯飞语音+
+	 private boolean checkSpeechServiceInstall(){
+		 String packageName = "com.iflytek.speechcloud";
+		 List<PackageInfo> packages = getPackageManager().getInstalledPackages(0);
+		 for(int i = 0; i < packages.size(); i++){
+			 PackageInfo packageInfo = packages.get(i);
+			 if(packageInfo.packageName.equals(packageName)){
+				 return true;
+			 }else{
+				 continue;
+			 }
+		 }
+		 return false;
+	 }
+	 
+	 private void install(){
+		 if(!checkSpeechServiceInstall()){
+			 String url = SpeechUtility.getUtility(MainActivity.this)
+						.getComponentUrl();
+			String assetsApk = "SpeechService_1.0.1006.mp3";
+			processInstall(MainActivity.this, url, assetsApk);
+			AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);  
+	        builder.setTitle("讯飞语言安装完毕，请重新启动！");  
+	        builder.setPositiveButton("好的", new EmptyListener());  
+	        AlertDialog ad = builder.create();  
+	        ad.show();  
+			
+		 }
+	 }
+	 
+	 //空的监听类  
+	    private class EmptyListener implements DialogInterface.OnClickListener{  
+	   
+	        @Override  
+	        public void onClick(DialogInterface dialog, int which) {  
+	        	ExitApplication.getInstance().exit();
+				System.exit(0);
+	        }  
+	    }  
 }

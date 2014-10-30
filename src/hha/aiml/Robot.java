@@ -1,5 +1,6 @@
 package hha.aiml;
 
+import hha.main.AppData;
 import hha.main.MainActivity;
 import hha.mode.Database;
 
@@ -33,6 +34,11 @@ public class Robot implements Runnable {
 	AliceBot bot = null;
 	Context context = null;
 	private Database db = null;
+
+	public Database getDb() {
+		return db;
+	}
+
 	Graphmaster graphmaster = null;
 	BotEmotion emotion = null;
 	AssetManager am = null;
@@ -52,10 +58,11 @@ public class Robot implements Runnable {
 		db = new Database(main, context);
 		db.InitDatabase();
 	}
+
 	public void InitRobot() {
 		// /初始化分词系统
 		try {
-
+			
 			InputStream prop = am.open("jcseg.properties",
 					AssetManager.ACCESS_BUFFER);
 
@@ -97,10 +104,16 @@ public class Robot implements Runnable {
 			emotion.main = main;
 			emotion.init();
 			// setProperty("mode", "healthy");
+			if (AppData.NetworkMode) {
+				net = new NetAiml((String) context.property("bot.aiml_url"),
+					(String) context.property("bot.data_url"));
+			}
 			InitDataBase(main);
 			context.outputStream(gossip);
-			int _port = Integer.parseInt((String) context.property("bot.port"));
-			net = new NetAiml((String) context.property("bot.ip"), _port);
+			// int _port = Integer.parseInt((String)
+			// context.property("bot.port"));
+			// net = new NetAiml((String) context.property("bot.ip"), _port);
+			
 			main.showTip("Bot Bootup");
 
 		} catch (IOException e) {
@@ -160,7 +173,7 @@ public class Robot implements Runnable {
 		} else
 			canfind = true;
 
-		if (canfind == false) {
+		if ((AppData.NetworkMode) && (canfind == false)) {
 			Match[] matchs = bot.getMatchdata();
 			for (Match match : matchs) {
 				String[] strings = match.getMatchPath();
@@ -168,13 +181,22 @@ public class Robot implements Runnable {
 				for (String string : strings) {
 					sb.append(string + " ");
 				}
-				if (net.Connect()) {
-					String st = net.GetNetAiml(sb.toString());
-					net.Close();
+				// if (net.Connect()) {
+				// String st = net.GetNetAiml(sb.toString());
+				// net.Close();
+				// if (st != null) {
+				// LearnFromStream(StringTOInputStream(st));
+				// return Respond(str);
+				// }
+				// }
+				try {
+					String st = net.getAiml(sb.toString());
 					if (st != null) {
 						LearnFromStream(StringTOInputStream(st));
 						return Respond(str);
 					}
+				} catch (Exception e) {
+					MainActivity.main.ShowTextOnUIThread("Error:"+match);
 				}
 			}
 		}
@@ -221,13 +243,14 @@ public class Robot implements Runnable {
 		UserData ud = new UserData(data, date);
 		if (UserDatalist == null) {
 			UserDatalist = new ArrayList<UserData>();
-			
 			UserDatalist.add(ud);
 			context.property("userdata." + name, UserDatalist);
 		} else {
 			UserDatalist.add(ud);
 		}
 		db.AddUserData(name, ud);
+		if (AppData.NetworkMode)
+			net.AddUserData(name, ud);
 	}
 
 	public void LearnFromStream(InputStream stream) {

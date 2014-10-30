@@ -2,14 +2,11 @@ package hha.mode;
 
 import hha.aiml.Robot;
 import hha.main.MainActivity;
-import hha.util.PackageUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.xml.sax.Attributes;
 
 import com.lilele.automatic.AuTomatic;
 
