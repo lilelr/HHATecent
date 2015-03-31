@@ -9,7 +9,7 @@ package hha.robot;
 
 public final class R {
     public static final class array {
-        public static final int sound=0x7f070000;
+        public static final int sound=0x7f080000;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -23,6 +23,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class color {
         public static final int black_overlay=0x7f050000;
+        public static final int blue=0x7f050004;
+        public static final int green=0x7f050003;
+        public static final int grey=0x7f050002;
+        public static final int list_item_pressed=0x7f050007;
+        public static final int myapp_list_row_bg_normal_color=0x7f050009;
+        public static final int myapp_list_row_bg_pressed_color=0x7f05000a;
+        public static final int myapp_list_row_title_color=0x7f05000b;
+        public static final int orange=0x7f050001;
+        public static final int red=0x7f050006;
+        public static final int white=0x7f050008;
+        public static final int yellow=0x7f050005;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -62,95 +73,112 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int changetogglebtn=0x7f020018;
         public static final int checkbox_off_background=0x7f020019;
         public static final int checkbox_on_background=0x7f02001a;
-        public static final int header=0x7f02001b;
-        public static final int header1=0x7f02001c;
-        public static final int ic_btn_speak_now=0x7f02001d;
-        public static final int ic_launcher=0x7f02001e;
-        public static final int incoming=0x7f02001f;
-        public static final int jiantou=0x7f020020;
-        public static final int login_background=0x7f020021;
-        public static final int login_lock=0x7f020022;
-        public static final int login_person=0x7f020023;
-        public static final int menubutton=0x7f020024;
-        public static final int menubutton1=0x7f020025;
-        public static final int outgoing=0x7f020026;
-        public static final int putin_textview=0x7f020027;
-        public static final int recordbutton=0x7f020028;
-        public static final int recordingbutton=0x7f020029;
-        public static final int recordingbutton1=0x7f02002a;
-        public static final int returnbutton=0x7f02002b;
-        public static final int returnbutton1=0x7f02002c;
-        public static final int robot=0x7f02002d;
-        public static final int user=0x7f02002e;
+        public static final int green_icon=0x7f02001b;
+        public static final int gridview_item_selector=0x7f02001c;
+        public static final int header=0x7f02001d;
+        public static final int header1=0x7f02001e;
+        public static final int ic_action_search=0x7f02001f;
+        public static final int ic_btn_speak_now=0x7f020020;
+        public static final int ic_launcher=0x7f020021;
+        public static final int incoming=0x7f020022;
+        public static final int jiantou=0x7f020023;
+        public static final int list_item_selector=0x7f020024;
+        public static final int login_background=0x7f020025;
+        public static final int login_lock=0x7f020026;
+        public static final int login_person=0x7f020027;
+        public static final int menubutton=0x7f020028;
+        public static final int menubutton1=0x7f020029;
+        public static final int myapp_row_click_selector=0x7f02002a;
+        public static final int outgoing=0x7f02002b;
+        public static final int putin_textview=0x7f02002c;
+        public static final int recordbutton=0x7f02002d;
+        public static final int recordingbutton=0x7f02002e;
+        public static final int recordingbutton1=0x7f02002f;
+        public static final int red_icon=0x7f020030;
+        public static final int returnbutton=0x7f020031;
+        public static final int returnbutton1=0x7f020032;
+        public static final int robot=0x7f020033;
+        public static final int user=0x7f020034;
     }
     public static final class id {
-        public static final int CheckBoxDebug=0x7f0b0028;
-        public static final int CheckBoxNetwork=0x7f0b002a;
-        public static final int TextView01=0x7f0b0029;
-        public static final int action_settings=0x7f0b002b;
-        public static final int blackLine=0x7f0b001d;
-        public static final int button1=0x7f0b0019;
-        public static final int button_main=0x7f0b000f;
-        public static final int button_speak=0x7f0b0013;
-        public static final int chartLinearLayout=0x7f0b001a;
-        public static final int debug_mode_str=0x7f0b0027;
-        public static final int description=0x7f0b001e;
-        public static final int editText1=0x7f0b0003;
-        public static final int forgetPassword=0x7f0b000a;
-        public static final int hanyuRadioButton=0x7f0b0023;
-        public static final int languageVideoGroup=0x7f0b0022;
-        public static final int listLinearLayout=0x7f0b0017;
-        public static final int loginButton=0x7f0b0009;
-        public static final int login_btn=0x7f0b0016;
-        public static final int main_text=0x7f0b0012;
-        public static final int memo_list=0x7f0b000c;
-        public static final int messagedetail_row_text=0x7f0b000d;
-        public static final int messagegedetail_rov_icon=0x7f0b000e;
-        public static final int more=0x7f0b001c;
-        public static final int options=0x7f0b0018;
-        public static final int password=0x7f0b0005;
-        public static final int password_again=0x7f0b000b;
-        public static final int percenttextView=0x7f0b0020;
-        public static final int ratingBar1=0x7f0b0002;
-        public static final int registerButton=0x7f0b0008;
-        public static final int returnbutton=0x7f0b0014;
-        public static final int scroll_view=0x7f0b0011;
-        public static final int seekBar=0x7f0b001f;
-        public static final int send_btn=0x7f0b0004;
-        public static final int setLanguage=0x7f0b0021;
-        public static final int setVoice=0x7f0b0025;
-        public static final int show_username=0x7f0b0015;
-        public static final int soundSpinner=0x7f0b0026;
-        public static final int talkList=0x7f0b0010;
-        public static final int textView1=0x7f0b0001;
-        public static final int textView2=0x7f0b0000;
-        public static final int title=0x7f0b001b;
-        public static final int userLogin=0x7f0b0006;
-        public static final int username=0x7f0b0007;
-        public static final int yueyuRadioButton=0x7f0b0024;
+        public static final int CheckBoxDebug=0x7f0c002e;
+        public static final int CheckBoxNetwork=0x7f0c0030;
+        public static final int TextView01=0x7f0c002f;
+        public static final int action_settings=0x7f0c0031;
+        public static final int blackLine=0x7f0c0023;
+        public static final int button1=0x7f0c001f;
+        public static final int button_main=0x7f0c0012;
+        public static final int button_speak=0x7f0c0016;
+        public static final int chartLinearLayout=0x7f0c0020;
+        public static final int cold_img=0x7f0c001c;
+        public static final int cold_name=0x7f0c001d;
+        public static final int cold_price=0x7f0c001e;
+        public static final int debug_mode_str=0x7f0c002d;
+        public static final int description=0x7f0c0024;
+        public static final int editText1=0x7f0c0003;
+        public static final int forgetPassword=0x7f0c000d;
+        public static final int hanyuRadioButton=0x7f0c0029;
+        public static final int image=0x7f0c0006;
+        public static final int languageVideoGroup=0x7f0c0028;
+        public static final int listLinearLayout=0x7f0c001a;
+        public static final int loginButton=0x7f0c000c;
+        public static final int login_btn=0x7f0c0019;
+        public static final int main_text=0x7f0c0015;
+        public static final int memo_list=0x7f0c000f;
+        public static final int messagedetail_row_text=0x7f0c0010;
+        public static final int messagegedetail_rov_icon=0x7f0c0011;
+        public static final int more=0x7f0c0022;
+        public static final int options=0x7f0c001b;
+        public static final int password=0x7f0c0008;
+        public static final int password_again=0x7f0c000e;
+        public static final int percenttextView=0x7f0c0026;
+        public static final int preview=0x7f0c0005;
+        public static final int ratingBar1=0x7f0c0002;
+        public static final int registerButton=0x7f0c000b;
+        public static final int returnbutton=0x7f0c0017;
+        public static final int scroll_view=0x7f0c0014;
+        public static final int seekBar=0x7f0c0025;
+        public static final int send_btn=0x7f0c0004;
+        public static final int setLanguage=0x7f0c0027;
+        public static final int setVoice=0x7f0c002b;
+        public static final int show_username=0x7f0c0018;
+        public static final int soundSpinner=0x7f0c002c;
+        public static final int talkList=0x7f0c0013;
+        public static final int text=0x7f0c0007;
+        public static final int textView1=0x7f0c0001;
+        public static final int textView2=0x7f0c0000;
+        public static final int title=0x7f0c0021;
+        public static final int userLogin=0x7f0c0009;
+        public static final int username=0x7f0c000a;
+        public static final int yueyuRadioButton=0x7f0c002a;
+    }
+    public static final class integer {
+        public static final int grid_column_count=0x7f070000;
     }
     public static final class layout {
         public static final int activity_about=0x7f030000;
-        public static final int activity_login=0x7f030001;
-        public static final int activity_memo=0x7f030002;
-        public static final int activity_suggest=0x7f030003;
-        public static final int list_say_he_item=0x7f030004;
-        public static final int list_say_me_item=0x7f030005;
-        public static final int maininterface=0x7f030006;
-        public static final int mainmenulist=0x7f030007;
-        public static final int mainmenulisttext=0x7f030008;
-        public static final int memo_item=0x7f030009;
-        public static final int my_chart=0x7f03000a;
-        public static final int set=0x7f03000b;
-        public static final int talklist_robot=0x7f03000c;
-        public static final int talklist_user=0x7f03000d;
+        public static final int activity_heart_rate=0x7f030001;
+        public static final int activity_login=0x7f030002;
+        public static final int activity_memo=0x7f030003;
+        public static final int activity_suggest=0x7f030004;
+        public static final int list_say_he_item=0x7f030005;
+        public static final int list_say_me_item=0x7f030006;
+        public static final int maininterface=0x7f030007;
+        public static final int mainmenulist=0x7f030008;
+        public static final int mainmenulisttext=0x7f030009;
+        public static final int medicine_cold=0x7f03000a;
+        public static final int memo_item=0x7f03000b;
+        public static final int my_chart=0x7f03000c;
+        public static final int set=0x7f03000d;
+        public static final int talklist_robot=0x7f03000e;
+        public static final int talklist_user=0x7f03000f;
     }
     public static final class menu {
-        public static final int about=0x7f0a0000;
-        public static final int main=0x7f0a0001;
-        public static final int memo=0x7f0a0002;
-        public static final int start=0x7f0a0003;
-        public static final int suggest=0x7f0a0004;
+        public static final int about=0x7f0b0000;
+        public static final int main=0x7f0b0001;
+        public static final int memo=0x7f0b0002;
+        public static final int start=0x7f0b0003;
+        public static final int suggest=0x7f0b0004;
     }
     public static final class raw {
         public static final int context=0x7f040000;
@@ -160,36 +188,38 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int substitutions=0x7f040004;
     }
     public static final class string {
-        public static final int action_settings=0x7f080001;
-        public static final int app_name=0x7f080000;
-        public static final int back=0x7f080004;
-        public static final int buaa_abs=0x7f080015;
-        public static final int child=0x7f08000b;
-        public static final int debug_mode=0x7f080017;
-        public static final int forgetPassword=0x7f080012;
-        public static final int hanyu=0x7f080006;
-        public static final int hello_world=0x7f080002;
-        public static final int loginButton=0x7f08000f;
-        public static final int mainmenu=0x7f080003;
-        public static final int network_mode=0x7f080018;
-        public static final int passwordAgainHint=0x7f08000e;
-        public static final int passwordHint=0x7f08000d;
-        public static final int registerButton=0x7f080010;
-        public static final int setlanguage=0x7f080008;
-        public static final int setvoice=0x7f080009;
-        public static final int show_abs=0x7f080016;
-        public static final int systemsound=0x7f08000c;
-        public static final int title_activity_about=0x7f080014;
-        public static final int title_activity_memo=0x7f080019;
-        public static final int title_activity_suggest=0x7f08001d;
-        public static final int title_section1=0x7f08001a;
-        public static final int title_section2=0x7f08001b;
-        public static final int title_section3=0x7f08001c;
-        public static final int unabletoopensoftware=0x7f080005;
-        public static final int userLogin=0x7f080011;
-        public static final int userNameHint=0x7f080013;
-        public static final int woman=0x7f08000a;
-        public static final int yueyu=0x7f080007;
+        public static final int action_settings=0x7f090001;
+        public static final int app_name=0x7f090000;
+        public static final int back=0x7f090004;
+        public static final int buaa_abs=0x7f090015;
+        public static final int child=0x7f09000b;
+        public static final int debug_mode=0x7f090017;
+        public static final int forgetPassword=0x7f090012;
+        public static final int hanyu=0x7f090006;
+        public static final int hello_world=0x7f090002;
+        public static final int loginButton=0x7f09000f;
+        public static final int mainmenu=0x7f090003;
+        public static final int network_mode=0x7f090018;
+        public static final int passwordAgainHint=0x7f09000e;
+        public static final int passwordHint=0x7f09000d;
+        public static final int registerButton=0x7f090010;
+        public static final int setlanguage=0x7f090008;
+        public static final int setvoice=0x7f090009;
+        public static final int show_abs=0x7f090016;
+        public static final int systemsound=0x7f09000c;
+        public static final int title_activity_about=0x7f090014;
+        public static final int title_activity_coldmedicine=0x7f09001f;
+        public static final int title_activity_heart_rate=0x7f09001e;
+        public static final int title_activity_memo=0x7f090019;
+        public static final int title_activity_suggest=0x7f09001d;
+        public static final int title_section1=0x7f09001a;
+        public static final int title_section2=0x7f09001b;
+        public static final int title_section3=0x7f09001c;
+        public static final int unabletoopensoftware=0x7f090005;
+        public static final int userLogin=0x7f090011;
+        public static final int userNameHint=0x7f090013;
+        public static final int woman=0x7f09000a;
+        public static final int yueyu=0x7f090007;
     }
     public static final class style {
         /** 
@@ -215,14 +245,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f0a0000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f090001;
-        public static final int ButtonBar=0x7f090003;
-        public static final int ButtonBarButton=0x7f090004;
-        public static final int FullscreenTheme=0x7f090002;
+        public static final int AppTheme=0x7f0a0001;
+        public static final int ButtonBar=0x7f0a0003;
+        public static final int ButtonBarButton=0x7f0a0004;
+        public static final int FullscreenTheme=0x7f0a0002;
     }
     public static final class styleable {
         /** 

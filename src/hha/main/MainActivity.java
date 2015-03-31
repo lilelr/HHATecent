@@ -2,6 +2,8 @@ package hha.main;
 
 import hha.aiml.Jcseg;
 import hha.aiml.Robot;
+import hha.heartrate.HeartRateActivity;
+import hha.medicinecold.MedicineColdActivity;
 import hha.robot.R;
 import hha.util.ApkInstaller;
 import hha.util.Caller;
@@ -42,6 +44,9 @@ import android.content.pm.ResolveInfo;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -97,7 +102,17 @@ public class MainActivity extends Activity implements Runnable {
 
 	LocalSoundPlayer player;
 	private ScrollView scrollView;
-
+   
+	private Handler myHandle = new Handler(){
+		 public void handleMessage(Message msg) {   
+             switch (msg.what) {   
+                  case 1:   
+                		Intent intent=new Intent(MainActivity.this,HeartRateActivity.class);
+    					startActivity(intent);
+                       break;   
+             }   
+             super.handleMessage(msg);   
+        }   	};
 	public Robot getBot() {
 		return bot;
 	}
@@ -219,7 +234,8 @@ public class MainActivity extends Activity implements Runnable {
 		// }
 		talkView.setSelection(list.size() - 1);
 	}
-
+    //主界面显示并说出机器人的回答
+	
 	public void Show(final String userString, final String ansString) {
 		runOnUiThread(new Runnable() {
 			@Override
@@ -288,6 +304,35 @@ public class MainActivity extends Activity implements Runnable {
 			if ("Stop".equals(com)) {
 				player.stop();
 			}
+			if("Heartrate".equals(com)){
+				try {
+				    Intent intent =new Intent(MainActivity.this,HeartRateActivity.class);
+			    startActivity(intent);
+		
+				} catch (Exception e) {
+					Log.e("xin", e.getMessage());
+					ShowTextOnUIThread("Error: " + e.getMessage());
+				}
+			}
+			if("medicine_cold".equals(com)){
+				try {
+				  
+					Show("cold_nose", bot.Respond(input));
+				} catch (Exception e) {
+					Log.e("xin", e.getMessage());
+					ShowTextOnUIThread("Error: " + e.getMessage());
+				}
+			}
+			  Intent intent =new Intent(MainActivity.this,MedicineColdActivity.class);				   
+
+			if ("activity_cold".equals(com)) {
+			String cold_symptoms = bot.getProperty("cold_symptoms");
+			
+				intent.putExtra("cold_symtom", cold_symptoms);
+			
+				  startActivity(intent);
+			}
+			
 		}
 
 		mAuTomatic.setS_emotionStatus("高兴");

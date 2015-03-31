@@ -8,5 +8,8 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="alice-src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="libs/universal-image-loader-1.9.3-with-sources.jar"/>
+	<classpathentry kind="lib" path="libs/Volley.jar"/>
+	<classpathentry kind="lib" path="libs/staggered-libary.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

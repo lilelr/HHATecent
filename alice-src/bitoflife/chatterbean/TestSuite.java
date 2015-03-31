@@ -1,5 +1,5 @@
 /*
-Copyleft (C) 2005 Hélio Perroni Filho
+Copyleft (C) 2005 Hï¿½lio Perroni Filho
 xperroni@yahoo.com
 ICQ: 2490863
 
@@ -16,7 +16,7 @@ package bitoflife.chatterbean;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.swingui.TestRunner;
+
 
 public class TestSuite extends junit.framework.TestSuite
 {
@@ -65,7 +65,7 @@ public class TestSuite extends junit.framework.TestSuite
   public static void main(String args[])
   {
     testNames = args;
-    TestRunner.main(new String[] {"-noloading", "bitoflife.chatterbean.TestSuite"});
+//    TestRunner.main(new String[] {"-noloading", "bitoflife.chatterbean.TestSuite"});
   }
 
   /**

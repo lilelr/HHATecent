@@ -31,5 +31,7 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_suggest">Suggest</string>
+    <string name="title_activity_heart_rate">心率检测</string>
+    <string name="title_activity_coldmedicine">感冒自测</string>
 
 </resources>

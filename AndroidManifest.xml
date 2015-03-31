@@ -9,12 +9,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" /> 
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+   <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
+     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+      <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-sdk android:minSdkVersion="14" >
     </uses-sdk>
 
@@ -73,6 +77,13 @@
             android:name="hha.main.Suggest"
             android:label="@string/title_activity_suggest" >
         </activity>
+        <activity
+            android:name="hha.heartrate.HeartRateActivity"
+            android:label="@string/title_activity_heart_rate" >
+        </activity>
+        <activity
+            android:name="hha.medicinecold.MedicineColdActivity"
+             android:label="@string/title_activity_coldmedicine"></activity>
     </application>
 
 </manifest>

@@ -21,11 +21,7 @@ public class AppData {
 	public static int RecognizableLanguage = 0; //0为汉语 1为粤语
 	public static String Speaker = "xiaoyan"; //发音人设置
 	public static boolean DebugMode = false;
-	public static boolean NetworkMode = false;
-	
-//	public static LoginData loginData = new LoginData();
-//	public static SettingData settingData = new SettingData();
-//	public static RobotParams robotParams = new RobotParams();
+	public static boolean NetworkMode = true;
 	
 	public static void SaveData()
 	{

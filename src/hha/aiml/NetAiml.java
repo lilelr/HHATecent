@@ -298,14 +298,14 @@ public class NetAiml {
     public static UpdateUtil util;
     
     public boolean Login(String username,String password) {
-//    	try {
+    	try {
     		MainActivity.main.ShowTextOnUIThread("username:"+username+"\npassword:"+password+"\nurl:"+data_url+"AccountApi/login");
 //			cookie = getCookie(username,password,data_url+"AccountApi/login");
     		util.Login(data_url+"AccountApi/login", username, password);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			MainActivity.main.ShowTextOnUIThread("Error:"+e.getMessage());
-//		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			MainActivity.main.ShowTextOnUIThread("Error:"+e.getMessage());
+		}
 //    	MainActivity.main.ShowTextOnUIThread("cookie:"+cookie);
 //		MainActivity.main.ShowTextOnUIThread("return:"+ret);
     	return true;

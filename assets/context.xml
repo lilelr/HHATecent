@@ -11,8 +11,8 @@
 	<bot name="version" value="0.7.5 Alpha" />
 	<bot name="location" value="Atlanta" />
 	<bot name="name" value="Alice" />
-	<bot name="aiml_url" value="http://192.168.0.100:8081/WebTest/" />
-	<bot name="data_url" value="http://192.168.0.100:8888/HHA-Web/" />
+	<bot name="aiml_url" value="http://smartboys.sinaapp.com/" />
+	<bot name="data_url" value="http://123.57.32.213/HHA-Web/" />
 	<bot name="ip" value="192.168.0.1" />
 	<bot name="port" value="10010" />
 

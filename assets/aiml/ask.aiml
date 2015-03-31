@@ -423,6 +423,23 @@
 				主人，您近来睡眠质量好还是不好？
 			</template>
 	</category>
+	
+	<category>
+		<pattern>ask_睡眠时间</pattern>
+			<template>
+				主人，昨天您睡了几个小时？
+			</template>
+	</category>
+
+	<category>
+		<regex>* #.(小时)? *</regex>
+		<input>ask_睡眠质量</input>
+		<template>
+			<srai>answer</srai>
+			<think><add name="element_睡眠时间"><sharp index="1"></sharp></add></think>
+		</template>
+	</category>
+	
 
 	<category>
 		<regex>#(我的)? #(睡眠|睡眠质量)? *</regex>

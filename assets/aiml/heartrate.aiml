@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aiml>
+<category>
+  <regex>* #心率检测|进入心率监测|进入心率检测 *</regex>
+  <template>
+    <think>
+      <set name="Command">
+        <template>Heartrate</template>
+      </set>
+    </think>
+    好的,请把您的食指轻按在摄像头上。等待30秒左右。
+  </template>
+</category>
+<category>
+		<regex>* #我感冒(了)?</regex>
+		<template>
+			<think>
+				<set name="Command">
+					<template>medicine_cold</template>
+				</set>
+				<set name="mode">cold</set>
+			</think>
+			好的,在药品自测开始之前，我需要了解您的姓名、年龄以及性别。请您为了更精确的药品推荐结果告诉我们一下。
+		</template>
+</category>
+<category>
+		<regex>cold_start</regex>
+		<template>
+			<random>
+				<li>欢迎进入感冒用药自测，小x我将会竭尽全力为你推荐最符合您身体状况的药品。</li>
+				<li>接下来，小x我将通过问答来确定您的身体状况如何。</li>
+				<li>亲，我需要了解您的症状才能寻找到最符合您的药品。让我像医生那样询问您的病症吧。</li>
+				<li>俗话说：“对症下药”。亲，让我们通过问答来了解您的感冒症状吧。
+				</li>
+			</random>
+		</template>
+</category>
+<category>
+	<regex>cold_nose</regex>
+	<template>
+		<random>
+		<li>您是否有鼻子不通气?</li>
+		<li>您鼻塞吗？</li>
+		<li>您鼻子不通气，是吧？</li>
+	</random>
+	</template>
+</category>
+<category>
+	<regex>* #是|对|嗯|鼻子不通气|正确|有|你说对了|鼻塞 *</regex>
+	<input>cold_nose</input>
+	<template>
+	<think>
+		<set name="symptom_cold_nose">true</set>
+	</think>
+	好的，我知道了。
+	</template>
+</category>
+<category>
+	<regex>* #不是|不对|没有|鼻子通气|你说错了|不是这样的 *</regex>
+	<input>cold_nose</input>
+	<template>
+	<think>
+		<set name="symptom_cold_nose">false</set>
+	</think>
+	好的，我知道了。
+	</template>
+</category>
+<category>
+	<regex>cold_sneeze</regex>
+	<template>
+		<random>
+		<li>您是否打喷嚏?</li>
+		<li>打喷嚏吗？</li>
+		<li>弱弱问一句，您打喷嚏吗？</li>
+		<li>继续问您鼻子的事，您打喷嚏吗？</li>
+	</random>
+	</template>
+</category>
+<category>
+	<regex>* #是|对|嗯|打(喷嚏)?|正确|有|你说对了|没错 *</regex>
+	<input>cold_sneeze</input>
+	<template>
+	<think>
+		<set name="symptom_cold_sneeze">true</set>
+	</think>
+	明白。
+	</template>
+</category>
+<category>
+	<regex>* #不是|不对|没(打|有)?|你说错了|不是这样 *</regex>
+	<input>cold_nose</input>
+	<template>
+	<think>
+		<set name="symptom_cold_sneeze">false</set>
+	</think>
+	好的，我知道了。
+	 </template>
+</category>
+<category>
+	<regex>cold_fever</regex>
+	<template>
+		<random>
+		<li>您觉得自己发烧吗?</li>
+		<li>您是否发烧？</li>
+		<li>现在，您有发烧的情况吗？</li>
+		<li>发烧吗？</li>
+	</random>
+	</template>
+</category>
+<category>
+	<regex>* #是|对|嗯|发烧|正确|有|你说对了|没错 *</regex>
+	<input>cold_fever</input>
+	<template>
+	<think>
+		<set name="symptom_cold_fever">true</set>
+	</think>
+	明白。
+	</template>
+</category>
+<category>
+	<regex>* #不|不对|没(打|有)?|你说错了|不是这样 *</regex>
+	<input>cold_nose</input>
+	<template>
+	<think>
+		<set name="symptom_cold_fever">false</set>
+	</think>
+	好的，我清楚了。
+	 </template>
+</category>
+<category>
+	<regex>cold_snot</regex>
+	<template>
+		<random>
+		<li>您流鼻涕吗?</li>
+		<li>鼻子的事还没完，您流鼻涕吗?</li>
+	</random>
+	</template>
+</category>
+<category>
+	<regex>* #是|对|嗯|有|流鼻涕|正确|你说对 *</regex>
+	<input>cold_snot</input>
+	<template>
+	<think>
+		<set name="symptom_cold_snot">true</set>
+	</think>
+	好的，我知道了。
+	</template>
+</category>
+<category>
+	<regex>* #不是|不对|没有|没流鼻涕|你说错了|不是这样的 *</regex>
+	<input>cold_snot</input>
+	<template>
+	<think>
+		<set name="symptom_cold_snot">false</set>
+	</think>
+	好的，我了解了。
+	</template>
+</category>
+<category>
+	<regex>cold_cough</regex>
+	<template>
+			<random>
+				<li>您有没有咳嗽?</li>
+				<li>您咳嗽吗?</li>
+				<li>您咳嗽得厉害吗?</li>
+			</random>
+	</template>
+</category>
+<category>
+	<regex>* #不|没有|没咳(嗽)?|你说错了|不厉害|一般|不是 *</regex>
+	<input>cold_cough</input>
+	<template>
+	<think>
+		<set name="symptom_cold_cough">false</set>
+	</think>
+	好的，我了解您的咳嗽情况了。
+	</template>
+</category>
+<category>
+	<regex>* #是|对|嗯|有|咳嗽|厉害|正确|你说对了 *</regex>
+	<input>cold_cough</input>
+	<template>
+	<think>
+		<set name="symptom_cold_cough">ture</set>
+	</think>
+	好的，我了解您的咳嗽情况了。
+	</template>
+</category>
+<category>
+	<regex>cold_end</regex>
+	<template>
+	<think>
+      <set name="Command">
+        <template>activity_cold</template>
+      </set>
+    </think>
+	好的，我已了解您的感冒情况，现在正努力为你查找最适合的药品。
+	</template>
+</category>
+</aiml>
