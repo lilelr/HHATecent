@@ -41,25 +41,25 @@ public class MedicineColdActivity extends ListActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Intent fromcoldModeIntent = getIntent();
-		String cold_symtom=fromcoldModeIntent.getStringExtra("cold_symtom");
-		String[] cold_sysmtoms = cold_symtom.split("_");
-		JSONObject jsonObjectRequest=new JSONObject();
-		try {
-			jsonObjectRequest.put("symton", "cold");
-			JSONObject symtonItems =new JSONObject();
-			symtonItems.put("cold_nose", cold_sysmtoms[0]);
-			symtonItems.put("cold_fever", cold_sysmtoms[1]);
-			symtonItems.put("cold_snot", cold_sysmtoms[2]);
-			symtonItems.put("cold_cough", cold_sysmtoms[3]);
-			jsonObjectRequest.put("subsymtons", symtonItems);
-			getJSONVolley(jsonObjectRequest);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		Intent fromcoldModeIntent = getIntent();
+//		String cold_symtom=fromcoldModeIntent.getStringExtra("cold_symtom");
+//		String[] cold_sysmtoms = cold_symtom.split("_");
+//		JSONObject jsonObjectRequest=new JSONObject();
+//		try {
+//			jsonObjectRequest.put("symton", "cold");
+//			JSONObject symtonItems =new JSONObject();
+//			symtonItems.put("cold_nose", cold_sysmtoms[0]);
+//			symtonItems.put("cold_fever", cold_sysmtoms[1]);
+//			symtonItems.put("cold_snot", cold_sysmtoms[2]);
+//			symtonItems.put("cold_cough", cold_sysmtoms[3]);
+//			jsonObjectRequest.put("subsymtons", symtonItems);
+//			getJSONVolley(jsonObjectRequest);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
-		mData = null;
+		mData = getData();
 		MyAdapter adapter = new MyAdapter(this);
 		setListAdapter(adapter);
 	}
@@ -85,28 +85,29 @@ public class MedicineColdActivity extends ListActivity{
 		}
 		
 	private List<Map<String, Object>> getData() {
-//		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		InputStream inputStream;
-//		try {
-//			inputStream=this.getAssets().open("my_home_friends.txt");
-//			String json=readTextFile(inputStream);
-//			JSONArray array = new JSONArray(json);
-//			for (int i = 0; i < array.length(); i++) {
-//				map = new HashMap<String, Object>();
-//				map.put("name", array.getJSONObject(i).getString("name"));
-//				map.put("info", array.getJSONObject(i).getString("info"));
-//				map.put("img",array.getJSONObject(i).getString("photo"));
-//				list.add(map);
-//			}
-//			return list;	
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//		
-//		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		InputStream inputStream;
+		try {
+			inputStream=this.getAssets().open("static_medicine.txt");
+			String json=readTextFile(inputStream);
+			JSONArray array = new JSONArray(json);
+			for (int i = 0; i < array.length(); i++) {
+				map = new HashMap<String, Object>();
+				map.put("name", array.getJSONObject(i).getString("desc"));
+				map.put("imgurl", array.getJSONObject(i).getString("imgurl"));
+				map.put("priceurl",array.getJSONObject(i).getString("priceurl"));
+				map.put("pop", array.getJSONObject(i).getString("pop"));
+				list.add(map);
+			}
+			return list;	
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
 		return null;	
 	}
 	
@@ -116,6 +117,7 @@ public class MedicineColdActivity extends ListActivity{
 		public ImageView medicine_img;
 		public TextView medicine_name;
 		public ImageView medicine_price;
+		public TextView medicine_popularity;
 	}	
 	
 
@@ -130,7 +132,7 @@ public class MedicineColdActivity extends ListActivity{
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 0;
+			return mData.size();
 		}
 
 		@Override
@@ -147,34 +149,80 @@ public class MedicineColdActivity extends ListActivity{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-//			
-//			ViewHolder holder = null;
-//			if (convertView == null) {
-//				
-//				holder=new ViewHolder();  
-//				
-//				convertView = mInflater.inflate(R.layout.medicine_cold, null);
-//				holder.medicine_img = (ImageView)convertView.findViewById(R.id.cold_img);
-//				holder.medicine_name = (TextView)convertView.findViewById(R.id.cold_name);
-//				holder.medicine_price = (ImageView)convertView.findViewById(R.id.cold_price);
-//				convertView.setTag(holder);
-//				
-//			}else {
-//				
-//				holder = (ViewHolder)convertView.getTag();
-//			}
-//			
-//			holder.medicine_img.setImageBitmap(getHome((String)mData.get(position).get("img")));
-//			holder.medicine_name.setText((String)mData.get(position).get("name"));
-////			holder.info.setText((String)mData.get(position).get("info"));
+			
+			ViewHolder holder = null;
+			if (convertView == null) {
+				
+				holder=new ViewHolder();  
+				
+				convertView = mInflater.inflate(R.layout.medicine_cold, null);
+				holder.medicine_img = (ImageView)convertView.findViewById(R.id.cold_img);
+				holder.medicine_name = (TextView)convertView.findViewById(R.id.cold_name);
+				holder.medicine_price = (ImageView)convertView.findViewById(R.id.cold_price);
+				holder.medicine_popularity=(TextView) convertView.findViewById(R.id.cold_pop);
+				convertView.setTag(holder);
+				
+			}else {
+				
+				holder = (ViewHolder)convertView.getTag();
+			}
+			
+
+			holder.medicine_img.setImageBitmap(getHome((String)mData.get(position).get("imgurl")));
+			holder.medicine_name.setText((String)mData.get(position).get("name"));
+
+			holder.medicine_popularity.setText("人气:"+(String) mData.get(position).get("pop"));
+			holder.medicine_price.setImageBitmap(getHome((String)mData.get(position).get("priceurl")));
 
 			return convertView;
 		}
 		
 	}
 	
-	
+////工具类
+	/**
+	 * 
+	 * @param inputStream
+	 * @return
+	 */
+	public String readTextFile(InputStream inputStream) {
+		String readedStr = "";
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+			String tmp;
+			while ((tmp = br.readLine()) != null) {
+				readedStr += tmp;
+			}
+			br.close();
+			inputStream.close();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		return readedStr;
+	}
+
+	/**
+	 * 根据图片名称获取主页图片
+	 */
+	public Bitmap getHome(String photo){		
 	
+		InputStream is=null;
+		
+        try {
+        	is=getAssets().open("staticmedicine/"+photo);
+            Bitmap bitmap = BitmapFactory.decodeStream(is);     
+            is.close();
+            return bitmap;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+        return null;
+
+	}
 	
 }

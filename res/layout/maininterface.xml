@@ -32,7 +32,7 @@
             android:background="@drawable/changemenubutton"
             android:text="@string/mainmenu"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" >
+            android:textSize="20sp" >
         </Button>
     </RelativeLayout>
 

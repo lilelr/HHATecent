@@ -103,7 +103,8 @@ public class ColdMedicineMode extends Mode{
 //						      Log.i("error", e.getMessage());
 //						}
 //			     
-			        	
+			        	  Intent intent =new Intent(this.mainActivity,MedicineColdActivity.class);
+			        	  this.mainActivity.startActivity(intent);
 			        
 			        	
 					}

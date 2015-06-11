@@ -15,7 +15,26 @@
 			</random>
 		</template>
 	</category>
-
+<category>
+		<regex>* #退出|再见|滚蛋 *</regex>
+		<template>
+		<think>
+      <set name="Command">
+        <template>exit</template>
+        </set>
+        </think>
+			<random>
+				<li>恩，了解，拜拜。</li>
+				<li>恩，很高兴和你聊天，后会有期。</li>
+				<li>后会有期。</li>
+				<li>恩的，明白。</li>
+				<li>好的，再见。</li>
+				<li>恩，我知道了。再见。</li>
+				<li>知道了，我会想念你的。</li>
+				  本软件将在5秒后自动退出。
+			</random>
+		</template>
+	</category>
 	<category>
 		<regex>ask_name</regex>
 		<template>

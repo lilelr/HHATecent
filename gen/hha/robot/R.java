@@ -9,7 +9,7 @@ package hha.robot;
 
 public final class R {
     public static final class array {
-        public static final int sound=0x7f080000;
+        public static final int sound=0x7f090000;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -20,20 +20,109 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int buttonBarStyle=0x7f010000;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int max=0x7f010003;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int numberProgressBarStyle=0x7f01000b;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress=0x7f010002;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_circle_radius=0x7f010008;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>rotate</code></td><td>0</td><td></td></tr>
+<tr><td><code>rising_water</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int progress_fill_mode=0x7f01000a;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_reached_color=0x7f010005;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_text_color=0x7f010007;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_text_size=0x7f010006;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>visible</code></td><td>0</td><td></td></tr>
+<tr><td><code>invisible</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int progress_text_visibility=0x7f010009;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_unreached_color=0x7f010004;
     }
     public static final class color {
-        public static final int black_overlay=0x7f050000;
-        public static final int blue=0x7f050004;
-        public static final int green=0x7f050003;
-        public static final int grey=0x7f050002;
-        public static final int list_item_pressed=0x7f050007;
-        public static final int myapp_list_row_bg_normal_color=0x7f050009;
-        public static final int myapp_list_row_bg_pressed_color=0x7f05000a;
-        public static final int myapp_list_row_title_color=0x7f05000b;
-        public static final int orange=0x7f050001;
-        public static final int red=0x7f050006;
-        public static final int white=0x7f050008;
-        public static final int yellow=0x7f050005;
+        public static final int black_overlay=0x7f060000;
+        public static final int blue=0x7f060004;
+        public static final int green=0x7f060003;
+        public static final int grey=0x7f060002;
+        public static final int list_item_pressed=0x7f060007;
+        public static final int myapp_list_row_bg_normal_color=0x7f060009;
+        public static final int myapp_list_row_bg_pressed_color=0x7f06000a;
+        public static final int myapp_list_row_title_color=0x7f06000b;
+        public static final int orange=0x7f060001;
+        public static final int red=0x7f060006;
+        public static final int white=0x7f060008;
+        public static final int yellow=0x7f060005;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -42,8 +131,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
         public static final int app=0x7f020000;
@@ -101,59 +190,66 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int user=0x7f020034;
     }
     public static final class id {
-        public static final int CheckBoxDebug=0x7f0c002e;
-        public static final int CheckBoxNetwork=0x7f0c0030;
-        public static final int TextView01=0x7f0c002f;
-        public static final int action_settings=0x7f0c0031;
-        public static final int blackLine=0x7f0c0023;
-        public static final int button1=0x7f0c001f;
-        public static final int button_main=0x7f0c0012;
-        public static final int button_speak=0x7f0c0016;
-        public static final int chartLinearLayout=0x7f0c0020;
-        public static final int cold_img=0x7f0c001c;
-        public static final int cold_name=0x7f0c001d;
-        public static final int cold_price=0x7f0c001e;
-        public static final int debug_mode_str=0x7f0c002d;
-        public static final int description=0x7f0c0024;
-        public static final int editText1=0x7f0c0003;
-        public static final int forgetPassword=0x7f0c000d;
-        public static final int hanyuRadioButton=0x7f0c0029;
-        public static final int image=0x7f0c0006;
-        public static final int languageVideoGroup=0x7f0c0028;
-        public static final int listLinearLayout=0x7f0c001a;
-        public static final int loginButton=0x7f0c000c;
-        public static final int login_btn=0x7f0c0019;
-        public static final int main_text=0x7f0c0015;
-        public static final int memo_list=0x7f0c000f;
-        public static final int messagedetail_row_text=0x7f0c0010;
-        public static final int messagegedetail_rov_icon=0x7f0c0011;
-        public static final int more=0x7f0c0022;
-        public static final int options=0x7f0c001b;
-        public static final int password=0x7f0c0008;
-        public static final int password_again=0x7f0c000e;
-        public static final int percenttextView=0x7f0c0026;
-        public static final int preview=0x7f0c0005;
-        public static final int ratingBar1=0x7f0c0002;
-        public static final int registerButton=0x7f0c000b;
-        public static final int returnbutton=0x7f0c0017;
-        public static final int scroll_view=0x7f0c0014;
-        public static final int seekBar=0x7f0c0025;
-        public static final int send_btn=0x7f0c0004;
-        public static final int setLanguage=0x7f0c0027;
-        public static final int setVoice=0x7f0c002b;
-        public static final int show_username=0x7f0c0018;
-        public static final int soundSpinner=0x7f0c002c;
-        public static final int talkList=0x7f0c0013;
-        public static final int text=0x7f0c0007;
-        public static final int textView1=0x7f0c0001;
-        public static final int textView2=0x7f0c0000;
-        public static final int title=0x7f0c0021;
-        public static final int userLogin=0x7f0c0009;
-        public static final int username=0x7f0c000a;
-        public static final int yueyuRadioButton=0x7f0c002a;
+        public static final int CheckBoxDebug=0x7f050035;
+        public static final int CheckBoxNetwork=0x7f050037;
+        public static final int TextView01=0x7f050036;
+        public static final int action_settings=0x7f050038;
+        public static final int blackLine=0x7f05002a;
+        public static final int button1=0x7f050026;
+        public static final int button_main=0x7f050018;
+        public static final int button_speak=0x7f05001c;
+        public static final int chartLinearLayout=0x7f050027;
+        public static final int cold_img=0x7f050022;
+        public static final int cold_name=0x7f050023;
+        public static final int cold_pop=0x7f050024;
+        public static final int cold_price=0x7f050025;
+        public static final int debug_mode_str=0x7f050034;
+        public static final int description=0x7f05002b;
+        public static final int editText1=0x7f050007;
+        public static final int forgetPassword=0x7f050013;
+        public static final int hanyuRadioButton=0x7f050030;
+        public static final int hearate_desc=0x7f05000b;
+        public static final int image=0x7f05000a;
+        public static final int invisible=0x7f050001;
+        public static final int languageVideoGroup=0x7f05002f;
+        public static final int listLinearLayout=0x7f050020;
+        public static final int loginButton=0x7f050012;
+        public static final int login_btn=0x7f05001f;
+        public static final int main_text=0x7f05001b;
+        public static final int memo_list=0x7f050015;
+        public static final int messagedetail_row_text=0x7f050016;
+        public static final int messagegedetail_rov_icon=0x7f050017;
+        public static final int more=0x7f050029;
+        public static final int options=0x7f050021;
+        public static final int password=0x7f05000e;
+        public static final int password_again=0x7f050014;
+        public static final int percenttextView=0x7f05002d;
+        public static final int preview=0x7f050009;
+        public static final int progress_heart_rate=0x7f05000d;
+        public static final int ratingBar1=0x7f050006;
+        public static final int registerButton=0x7f050011;
+        public static final int returnbutton=0x7f05001d;
+        public static final int rising_water=0x7f050003;
+        public static final int rotate=0x7f050002;
+        public static final int scroll_view=0x7f05001a;
+        public static final int seekBar=0x7f05002c;
+        public static final int send_btn=0x7f050008;
+        public static final int setLanguage=0x7f05002e;
+        public static final int setVoice=0x7f050032;
+        public static final int show_username=0x7f05001e;
+        public static final int soundSpinner=0x7f050033;
+        public static final int talkList=0x7f050019;
+        public static final int text=0x7f05000c;
+        public static final int textView1=0x7f050005;
+        public static final int textView2=0x7f050004;
+        public static final int title=0x7f050028;
+        public static final int userLogin=0x7f05000f;
+        public static final int username=0x7f050010;
+        public static final int visible=0x7f050000;
+        public static final int yueyuRadioButton=0x7f050031;
     }
     public static final class integer {
-        public static final int grid_column_count=0x7f070000;
+        public static final int grid_column_count=0x7f080000;
     }
     public static final class layout {
         public static final int activity_about=0x7f030000;
@@ -174,11 +270,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int talklist_user=0x7f03000f;
     }
     public static final class menu {
-        public static final int about=0x7f0b0000;
-        public static final int main=0x7f0b0001;
-        public static final int memo=0x7f0b0002;
-        public static final int start=0x7f0b0003;
-        public static final int suggest=0x7f0b0004;
+        public static final int about=0x7f0c0000;
+        public static final int main=0x7f0c0001;
+        public static final int memo=0x7f0c0002;
+        public static final int start=0x7f0c0003;
+        public static final int suggest=0x7f0c0004;
     }
     public static final class raw {
         public static final int context=0x7f040000;
@@ -188,38 +284,39 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int substitutions=0x7f040004;
     }
     public static final class string {
-        public static final int action_settings=0x7f090001;
-        public static final int app_name=0x7f090000;
-        public static final int back=0x7f090004;
-        public static final int buaa_abs=0x7f090015;
-        public static final int child=0x7f09000b;
-        public static final int debug_mode=0x7f090017;
-        public static final int forgetPassword=0x7f090012;
-        public static final int hanyu=0x7f090006;
-        public static final int hello_world=0x7f090002;
-        public static final int loginButton=0x7f09000f;
-        public static final int mainmenu=0x7f090003;
-        public static final int network_mode=0x7f090018;
-        public static final int passwordAgainHint=0x7f09000e;
-        public static final int passwordHint=0x7f09000d;
-        public static final int registerButton=0x7f090010;
-        public static final int setlanguage=0x7f090008;
-        public static final int setvoice=0x7f090009;
-        public static final int show_abs=0x7f090016;
-        public static final int systemsound=0x7f09000c;
-        public static final int title_activity_about=0x7f090014;
-        public static final int title_activity_coldmedicine=0x7f09001f;
-        public static final int title_activity_heart_rate=0x7f09001e;
-        public static final int title_activity_memo=0x7f090019;
-        public static final int title_activity_suggest=0x7f09001d;
-        public static final int title_section1=0x7f09001a;
-        public static final int title_section2=0x7f09001b;
-        public static final int title_section3=0x7f09001c;
-        public static final int unabletoopensoftware=0x7f090005;
-        public static final int userLogin=0x7f090011;
-        public static final int userNameHint=0x7f090013;
-        public static final int woman=0x7f09000a;
-        public static final int yueyu=0x7f090007;
+        public static final int action_settings=0x7f0a0001;
+        public static final int app_name=0x7f0a0000;
+        public static final int back=0x7f0a0004;
+        public static final int buaa_abs=0x7f0a0015;
+        public static final int child=0x7f0a000b;
+        public static final int debug_mode=0x7f0a0017;
+        public static final int forgetPassword=0x7f0a0012;
+        public static final int hanyu=0x7f0a0006;
+        public static final int hearate_description=0x7f0a0020;
+        public static final int hello_world=0x7f0a0002;
+        public static final int loginButton=0x7f0a000f;
+        public static final int mainmenu=0x7f0a0003;
+        public static final int network_mode=0x7f0a0018;
+        public static final int passwordAgainHint=0x7f0a000e;
+        public static final int passwordHint=0x7f0a000d;
+        public static final int registerButton=0x7f0a0010;
+        public static final int setlanguage=0x7f0a0008;
+        public static final int setvoice=0x7f0a0009;
+        public static final int show_abs=0x7f0a0016;
+        public static final int systemsound=0x7f0a000c;
+        public static final int title_activity_about=0x7f0a0014;
+        public static final int title_activity_coldmedicine=0x7f0a001f;
+        public static final int title_activity_heart_rate=0x7f0a001e;
+        public static final int title_activity_memo=0x7f0a0019;
+        public static final int title_activity_suggest=0x7f0a001d;
+        public static final int title_section1=0x7f0a001a;
+        public static final int title_section2=0x7f0a001b;
+        public static final int title_section3=0x7f0a001c;
+        public static final int unabletoopensoftware=0x7f0a0005;
+        public static final int userLogin=0x7f0a0011;
+        public static final int userNameHint=0x7f0a0013;
+        public static final int woman=0x7f0a000a;
+        public static final int yueyu=0x7f0a0007;
     }
     public static final class style {
         /** 
@@ -245,14 +342,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f0a0000;
+        public static final int AppBaseTheme=0x7f0b0000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f0a0001;
-        public static final int ButtonBar=0x7f0a0003;
-        public static final int ButtonBarButton=0x7f0a0004;
-        public static final int FullscreenTheme=0x7f0a0002;
+        public static final int AppTheme=0x7f0b0001;
+        public static final int ButtonBar=0x7f0b0003;
+        public static final int ButtonBarButton=0x7f0b0004;
+        public static final int FullscreenTheme=0x7f0b0002;
+        public static final int NumberCircleProgressBar_Default=0x7f0b0005;
     }
     public static final class styleable {
         /** 
@@ -295,5 +393,198 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name hha.robot:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
+        /** Attributes that can be used with a NumberCircleProgressBar.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_max hha.robot:max}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress hha.robot:progress}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress_circle_radius hha.robot:progress_circle_radius}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress_fill_mode hha.robot:progress_fill_mode}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress_reached_color hha.robot:progress_reached_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress_text_color hha.robot:progress_text_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress_text_size hha.robot:progress_text_size}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress_text_visibility hha.robot:progress_text_visibility}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberCircleProgressBar_progress_unreached_color hha.robot:progress_unreached_color}</code></td><td></td></tr>
+           </table>
+           @see #NumberCircleProgressBar_max
+           @see #NumberCircleProgressBar_progress
+           @see #NumberCircleProgressBar_progress_circle_radius
+           @see #NumberCircleProgressBar_progress_fill_mode
+           @see #NumberCircleProgressBar_progress_reached_color
+           @see #NumberCircleProgressBar_progress_text_color
+           @see #NumberCircleProgressBar_progress_text_size
+           @see #NumberCircleProgressBar_progress_text_visibility
+           @see #NumberCircleProgressBar_progress_unreached_color
+         */
+        public static final int[] NumberCircleProgressBar = {
+            0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005,
+            0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009,
+            0x7f01000a
+        };
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#max}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name hha.robot:max
+        */
+        public static final int NumberCircleProgressBar_max = 1;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name hha.robot:progress
+        */
+        public static final int NumberCircleProgressBar_progress = 0;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress_circle_radius}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name hha.robot:progress_circle_radius
+        */
+        public static final int NumberCircleProgressBar_progress_circle_radius = 6;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress_fill_mode}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>rotate</code></td><td>0</td><td></td></tr>
+<tr><td><code>rising_water</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name hha.robot:progress_fill_mode
+        */
+        public static final int NumberCircleProgressBar_progress_fill_mode = 8;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress_reached_color}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name hha.robot:progress_reached_color
+        */
+        public static final int NumberCircleProgressBar_progress_reached_color = 3;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress_text_color}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name hha.robot:progress_text_color
+        */
+        public static final int NumberCircleProgressBar_progress_text_color = 5;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress_text_size}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name hha.robot:progress_text_size
+        */
+        public static final int NumberCircleProgressBar_progress_text_size = 4;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress_text_visibility}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>visible</code></td><td>0</td><td></td></tr>
+<tr><td><code>invisible</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name hha.robot:progress_text_visibility
+        */
+        public static final int NumberCircleProgressBar_progress_text_visibility = 7;
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#progress_unreached_color}
+          attribute's value can be found in the {@link #NumberCircleProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name hha.robot:progress_unreached_color
+        */
+        public static final int NumberCircleProgressBar_progress_unreached_color = 2;
+        /** Attributes that can be used with a Themes.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #Themes_numberProgressBarStyle hha.robot:numberProgressBarStyle}</code></td><td></td></tr>
+           </table>
+           @see #Themes_numberProgressBarStyle
+         */
+        public static final int[] Themes = {
+            0x7f01000b
+        };
+        /**
+          <p>This symbol is the offset where the {@link hha.robot.R.attr#numberProgressBarStyle}
+          attribute's value can be found in the {@link #Themes} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name hha.robot:numberProgressBarStyle
+        */
+        public static final int Themes_numberProgressBarStyle = 0;
     };
 }

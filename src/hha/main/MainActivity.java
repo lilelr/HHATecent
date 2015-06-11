@@ -314,6 +314,7 @@ public class MainActivity extends Activity implements Runnable {
 					ShowTextOnUIThread("Error: " + e.getMessage());
 				}
 			}
+			
 			if("medicine_cold".equals(com)){
 				try {
 				  
@@ -323,15 +324,13 @@ public class MainActivity extends Activity implements Runnable {
 					ShowTextOnUIThread("Error: " + e.getMessage());
 				}
 			}
-			  Intent intent =new Intent(MainActivity.this,MedicineColdActivity.class);				   
+			   
 
-			if ("activity_cold".equals(com)) {
-			String cold_symptoms = bot.getProperty("cold_symptoms");
-			
-				intent.putExtra("cold_symtom", cold_symptoms);
-			
-				  startActivity(intent);
-			}
+			if ("exit".equals(com)) {
+			 
+		      this.finish();
+		      System.exit(0);
+		}
 			
 		}
 

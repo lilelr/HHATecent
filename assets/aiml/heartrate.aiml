@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <aiml>
 <category>
-  <regex>* #心率检测|进入心率监测|进入心率检测 *</regex>
+  <regex>* #心率检测|进入心率监测|进入心率检测|检测心率|测一测心率 *</regex>
   <template>
     <think>
       <set name="Command">
@@ -12,7 +12,18 @@
   </template>
 </category>
 <category>
-		<regex>* #我感冒(了)?</regex>
+  <regex>* #我心脏不(太)好|心脏有毛病|心脏有问题 *</regex>
+  <template>
+    <think>
+      <set name="Command">
+        <template>Heartrate</template>
+      </set>
+    </think>
+    这样子啊,我来帮你做一次心率检测。请把您的食指轻按在摄像头上。等待30秒左右。
+  </template>
+</category>
+<category>
+		<regex>* #我感冒(了)?|感冒(要)吃什么药|感冒药 *</regex>
 		<template>
 			<think>
 				<set name="Command">
@@ -20,17 +31,17 @@
 				</set>
 				<set name="mode">cold</set>
 			</think>
-			好的,在药品自测开始之前，我需要了解您的姓名、年龄以及性别。请您为了更精确的药品推荐结果告诉我们一下。
+			
 		</template>
 </category>
 <category>
 		<regex>cold_start</regex>
 		<template>
 			<random>
-				<li>欢迎进入感冒用药自测，小x我将会竭尽全力为你推荐最符合您身体状况的药品。</li>
-				<li>接下来，小x我将通过问答来确定您的身体状况如何。</li>
-				<li>亲，我需要了解您的症状才能寻找到最符合您的药品。让我像医生那样询问您的病症吧。</li>
-				<li>俗话说：“对症下药”。亲，让我们通过问答来了解您的感冒症状吧。
+				<li>欢迎进入感冒用药自测，小x我将会竭尽全力为你推荐最符合您身体状况的药品。亲，你对感冒了解吗？其实广义上感冒不是一个疾病诊断，而是一组疾病，包括普通感冒、病毒性咽炎、喉炎、疱疹性咽峡炎、咽结膜热、细菌性咽-扁桃体炎。</li>
+				<li>接下来，小x我将通过问答来确定您的身体状况如何，进而推荐最适合您的药品，但是，亲，请切记，病情较重或年老体弱者应卧床休息，忌烟、多饮水，室内保持空气流通。</li>
+				<li>亲，我需要了解您的症状才能寻找到最符合您的药品。让我像医生那样询问您的病症吧。请记住，坚持适度有规律的户外运动，提高机体免疫力与耐寒能力是预防本病的主要方法。所以，要多锻炼身体啊！</li>
+				<li>俗话说：“对症下药”。亲，让我们通过问答来了解您的感冒症状吧。但是，亲，请切记，病情较重或年老体弱者应卧床休息，忌烟、多饮水，室内保持空气流通。还有要多锻炼身体，增强免疫力哦。
 				</li>
 			</random>
 		</template>
@@ -177,7 +188,7 @@
 	</template>
 </category>
 <category>
-	<regex>* #是|对|嗯|有|咳嗽|厉害|正确|你说对了 *</regex>
+	<regex>* #是的|对|嗯|有|咳嗽|厉害|正确|你说对了 *</regex>
 	<input>cold_cough</input>
 	<template>
 	<think>
@@ -190,9 +201,10 @@
 	<regex>cold_end</regex>
 	<template>
 	<think>
-      <set name="Command">
-        <template>activity_cold</template>
-      </set>
+     <set name="Command">
+					<template>activity_cold</template>
+				</set>
+				<set name="mode">normal</set>
     </think>
 	好的，我已了解您的感冒情况，现在正努力为你查找最适合的药品。
 	</template>

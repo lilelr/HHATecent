@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HHA</string>
+    <string name="app_name">语音家庭健康助手</string>
     <string name="action_settings">设置</string>
     <string name="hello_world">Hello world!</string>
     <string name="mainmenu">主菜单</string>
@@ -33,5 +33,6 @@
     <string name="title_activity_suggest">Suggest</string>
     <string name="title_activity_heart_rate">心率检测</string>
     <string name="title_activity_coldmedicine">感冒自测</string>
+    <string name="hearate_description">安静时心率保持在55～70次/分钟是心脏健康的标志。\n老年人的心跳每分钟在60次以下要警惕，如果低于50次以下，很有可能是心脏的窦房结发生了病变。</string>
 
 </resources>

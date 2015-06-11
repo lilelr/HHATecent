@@ -2,28 +2,24 @@ package hha.heartrate;
 
 import hha.robot.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
-
-
-
-import android.os.Bundle;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
+import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
+import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
 
 public class HeartRateActivity extends Activity {
 	private static final String TAG = "HeartRateMonitor";
@@ -40,7 +36,9 @@ public class HeartRateActivity extends Activity {
 	private static int averageIndex = 0;
 	private static final int averageArraySize = 6;
 	private static final int[] averageArray = new int[averageArraySize];
-
+	private Timer timer;
+	public static boolean isFinish;
+    private int reclen;
 	public static enum TYPE {
 		GREEN, RED
 	};
@@ -56,6 +54,7 @@ public class HeartRateActivity extends Activity {
 	private static final int[] beatsArray = new int[beatsArraySize];
 	private static double beats = 0;
 	private static long startTime = 0;
+	private static int beatsAvg=0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,10 +67,12 @@ public class HeartRateActivity extends Activity {
 
 		image = findViewById(R.id.image);
 		text = (TextView) findViewById(R.id.text);
-
+		HeartRateActivity.this.isFinish=false;
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wakeLock = pm
 				.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
+		reclen=25;
+		setTheNumberProgressBar();
 	}
 
 	/**
@@ -202,9 +203,9 @@ public class HeartRateActivity extends Activity {
 						beatsArrayCnt++;
 					}
 				}
-				int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
-				beatsAvg+=35; //针对算法不严谨，增加的修正
-				text.setText("您的心率是"+String.valueOf(beatsAvg));
+				 beatsAvg = (beatsArrayAvg / beatsArrayCnt);
+//				beatsAvg+=20; //针对算法不严谨，增加的修正
+				//TODO
 				startTime = System.currentTimeMillis();
 				beats = 0;
 			}
@@ -274,5 +275,34 @@ public class HeartRateActivity extends Activity {
 
 		return result;
 	}
+	
+	public void setTheNumberProgressBar() {
+
+	     final NumberCircleProgressBar bnp = (NumberCircleProgressBar) findViewById(R.id.progress_heart_rate);
+	        timer = new Timer();
+	        timer.schedule(new TimerTask() {
+	            @Override
+	            public void run() {
+	                runOnUiThread(new Runnable() {
+	                    @Override
+	                    public void run() {
+	                    	reclen--;
+	                        if (reclen>=0) {
+	                            bnp.incrementProgressBy(4);
+	                            
+	                        }else {
+	                        	if (beatsAvg!=0) {
+	                        		text.setText("您的心率是"+String.valueOf(beatsAvg)+"次/分");
+								}else {
+									text.setText(":对不起，测得不准确，是不是您的手指离开了摄像头？");
+								}
+	                        	
+								timer.cancel();
+							}
+	                    }
+	                });
+	            }
+	        }, 4000, 1000);
+	    }
 
 }

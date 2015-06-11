@@ -81,9 +81,11 @@
             android:name="hha.heartrate.HeartRateActivity"
             android:label="@string/title_activity_heart_rate" >
         </activity>
-        <activity
+         <activity
             android:name="hha.medicinecold.MedicineColdActivity"
-             android:label="@string/title_activity_coldmedicine"></activity>
+             android:label="@string/title_activity_coldmedicine">
+         </activity>
+          
     </application>
 
 </manifest>

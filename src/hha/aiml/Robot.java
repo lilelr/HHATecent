@@ -114,7 +114,7 @@ public class Robot implements Runnable {
 			// context.property("bot.port"));
 			// net = new NetAiml((String) context.property("bot.ip"), _port);
 			
-			main.showTip("Bot Bootup");
+			main.showTip("报告，小X已经睡醒了！");
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
